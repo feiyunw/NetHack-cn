@@ -976,7 +976,19 @@ mswin_putstr(winid wid, int attr, const char *text)
 {
     logDebug("mswin_putstr(%d, %d, %s)\n", wid, attr, text);
 
-    mswin_putstr_ex(wid, attr, text, 0);
+    int i = 0, j = 0, l;
+    char cntext[3 * BUFSZ] = "";
+    l = strlen(text);
+    while(i < l-1)
+    {
+        if(text[i]==32 && text[i+1]<0) i++;
+        cntext[j] = text[i];
+        j++;
+        i++;
+    }
+    if(l > 0) cntext[j] = text[i];
+    
+    mswin_putstr_ex(wid, attr, cntext, 0);
 }
 
 void

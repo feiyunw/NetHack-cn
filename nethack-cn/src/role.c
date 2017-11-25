@@ -24,7 +24,7 @@
  * God names use a leading underscore to flag goddesses.
  */
 const struct Role roles[] = {
-    { { "a考古学家", 0 },  //Archeologist
+    { { "考古学家", 0 },  //Archeologist
       { { "挖掘者", 0 },  //Digger
         { "现场调查员", 0 },  //Field Worker
         { "调查员", 0 },  //Investigator
@@ -67,7 +67,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_MAGIC_MAPPING,
       -4 },
-    { { "b野蛮人", 0 },  //Barbarian
+    { { "野蛮人", 0 },  //Barbarian
       { { "掠夺者", "女掠夺者" },  //Plunderer Plunderess
         { "抢劫者", 0 },  //Pillager
         { "强盗", 0 },  //Bandit
@@ -110,7 +110,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_HASTE_SELF,
       -4 },
-    { { "c穴居人", "女性穴居人" },  //"Caveman", "Cavewoman"
+    { { "穴居人", "女性穴居人" },  //"Caveman", "Cavewoman"
       { { "穴居者", 0 },  //Troglodyte
         { "土著", 0 },  //Aborigine
         { "流浪者", 0 },  //Wanderer
@@ -153,7 +153,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_DIG,
       -4 },
-    { { "h医生", 0 },  //Healer
+    { { "医生", 0 },  //Healer
       { { "采药者", 0 },  //Rhizotomist
         { "庸医", 0 },  //Empiric
         { "敛尸官", 0 },  //Embalmer
@@ -195,7 +195,7 @@ const struct Role roles[] = {
       A_WIS,
       SPE_CURE_SICKNESS,
       -4 },
-    { { "k骑士", 0 },  //Knight
+    { { "骑士", 0 },  //Knight
       { { "豪侠", 0 },  //Gallant
         { "绅士", 0 },  //Esquire
         { "年轻骑士", 0 },  //Bachelor
@@ -237,7 +237,7 @@ const struct Role roles[] = {
       A_WIS,
       SPE_TURN_UNDEAD,
       -4 },
-    { { "m僧侣", 0 },  //Monk
+    { { "僧侣", 0 },  //Monk
       { { "和尚候选人", 0 },  //Candidate
         { "新和尚", 0 },  //Novice
         { "入门和尚", 0 },  //Initiate
@@ -280,7 +280,7 @@ const struct Role roles[] = {
       A_WIS,
       SPE_RESTORE_ABILITY,
       -4 },
-    { { "p牧师", "女性牧师" },  //"Priest", "Priestess"
+    { { "牧师", "女性牧师" },  //"Priest", "Priestess"
       { { "修道者", 0 },  //Aspirant
         { "侍祭", 0 },  //Acolyte
         { "修行师", 0 },  //Adept
@@ -324,7 +324,7 @@ const struct Role roles[] = {
       -4 },
     /* Note:  Rogue precedes Ranger so that use of `-R' on the command line
        retains its traditional meaning. */
-    { { "r盗贼", 0 },  //Rogue
+    { { "盗贼", 0 },  //Rogue
       { { "拦路贼", 0 },  //Footpad
         { "扒手", 0 },  //Cutpurse
         { "小贼", 0 },  //Rogue
@@ -366,7 +366,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_DETECT_TREASURE,
       -4 },
-    { { "R游侠", 0 },  //Ranger
+    { { "游侠", 0 },  //Ranger
       {
 #if 0 /* OBSOLETE */
         {"Edhel",   "Elleth"},
@@ -423,7 +423,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_INVISIBILITY,
       -4 },
-    { { "s武士", 0 },  //Samurai
+    { { "武士", 0 },  //Samurai
       { { "旗本", 0 },       /* Banner Knight */  //Hatamoto
         { "浪人", 0 },          /* no allegiance */  //Ronin
         { "忍者", "女忍者" }, /* secret society */  //Ninja  Kunoichi
@@ -465,7 +465,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_CLAIRVOYANCE,
       -4 },
-    { { "t游客", 0 },  //Tourist
+    { { "游客", 0 },  //Tourist
       { { "漫步者", 0 },  //Rambler
         { "观光者", 0 },  //Sightseer
         { "远足者", 0 },  //Excursionist
@@ -507,7 +507,7 @@ const struct Role roles[] = {
       A_INT,
       SPE_CHARM_MONSTER,
       -4 },
-    { { "v女武神", 0 },  //Valkyrie
+    { { "女武神", 0 },  //Valkyrie
       { { "女强人", 0 },  //Stripling
         { "散兵", 0 },  //Skirmisher
         { "女斗士", 0 },  //Fighter
@@ -549,7 +549,7 @@ const struct Role roles[] = {
       A_WIS,
       SPE_CONE_OF_COLD,
       -4 },
-    { { "w巫师", 0 },  //Wizard
+    { { "巫师", 0 },  //Wizard
       { { "聚能师", 0 },  //Evoker
         { "咒法师", 0 },  //Conjurer
         { "咒术士", 0 },  //Thaumaturge
@@ -627,7 +627,7 @@ struct Role urole = {
 /* Table of all races */
 const struct Race races[] = {
     {
-        "h人类",
+        "人类",
         "人类",
         "humanity",
         "Hum",
@@ -649,7 +649,7 @@ const struct Race races[] = {
         { 1, 0, 2, 0, 2, 0 }  /* Energy */
     },
     {
-        "e精灵",
+        "精灵",
         "精灵族",
         "elvenkind",
         "Elf",
@@ -670,7 +670,7 @@ const struct Race races[] = {
         { 2, 0, 3, 0, 3, 0 }  /* Energy */
     },
     {
-        "d矮人",
+        "矮人",
         "矮人族",
         "dwarvenkind",
         "Dwa",
@@ -691,7 +691,7 @@ const struct Race races[] = {
         { 0, 0, 0, 0, 0, 0 }  /* Energy */
     },
     {
-        "g侏儒",
+        "侏儒",
         "侏儒",
         "gnomehood",
         "Gno",
@@ -712,7 +712,7 @@ const struct Race races[] = {
         { 2, 0, 2, 0, 2, 0 }  /* Energy */
     },
     {
-        "o兽人",
+        "兽人",
         "兽人族",
         "orcdom",
         "Orc",
@@ -763,16 +763,16 @@ struct Race urace = {
 
 /* Table of all genders */
 const struct Gender genders[] = {
-    { "m男性", "他", "他", "他的", "Mal", ROLE_MALE },
-    { "f女性", "她", "她", "她的", "Fem", ROLE_FEMALE },
-    { "n无性", "它", "它", "它的", "Ntr", ROLE_NEUTER }
+    { "男性", "他", "他", "他的", "Mal", ROLE_MALE },
+    { "女性", "她", "她", "她的", "Fem", ROLE_FEMALE },
+    { "无性", "它", "它", "它的", "Ntr", ROLE_NEUTER }
 };
 
 /* Table of all alignments */
 const struct Align aligns[] = {
-    { "law", "l秩序", "Law", ROLE_LAWFUL, A_LAWFUL },
-    { "balance", "n中立", "Neu", ROLE_NEUTRAL, A_NEUTRAL },
-    { "chaos", "c混沌", "Cha", ROLE_CHAOTIC, A_CHAOTIC },
+    { "law", "秩序", "Law", ROLE_LAWFUL, A_LAWFUL },
+    { "balance", "中立", "Neu", ROLE_NEUTRAL, A_NEUTRAL },
+    { "chaos", "混沌", "Cha", ROLE_CHAOTIC, A_CHAOTIC },
     { "evil", "unaligned", "Una", 0, A_NONE }
 };
 

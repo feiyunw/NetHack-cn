@@ -108,7 +108,7 @@ register int otyp;
         actualn = Japanese_item_name(otyp);
     switch (ocl->oc_class) {
     case COIN_CLASS:
-        Strcpy(buf, "coin");
+        Strcpy(buf, "金币");
         break;
     case POTION_CLASS:
         Strcpy(buf, "药水");
@@ -131,26 +131,26 @@ register int otyp;
         else
             Strcpy(buf, "护身符");
         if (un)
-            Sprintf(eos(buf), " 被称为 %s", un);
+            Sprintf(eos(buf), "被称为%s", un);
         if (dn)
-            Sprintf(eos(buf), " ( %s)", dn);
+            Sprintf(eos(buf), " (%s)", dn);
         return buf;
     default:
         if (nn) {
             Strcpy(buf, actualn);
             if (GemStone(otyp))
-                Strcat(buf, " 石头");
+                Strcat(buf, "石头");
             if (un)
-                Sprintf(eos(buf), " 被称为 %s", un);
+                Sprintf(eos(buf), "被称为%s", un);
             if (dn)
-                Sprintf(eos(buf), " ( %s)", dn);
+                Sprintf(eos(buf), " (%s)", dn);
         } else {
             Strcpy(buf, dn ? dn : actualn);
             if (ocl->oc_class == GEM_CLASS)
                 Strcat(buf,
-                       (ocl->oc_material == MINERAL) ? " 石头" : " 宝石");
+                       (ocl->oc_material == MINERAL) ? "石头" : "宝石");
             if (un)
-                Sprintf(eos(buf), " 被称为 %s", un);
+                Sprintf(eos(buf), "被称为%s", un);
         }
         return buf;
     }
@@ -159,12 +159,12 @@ register int otyp;
         if (ocl->oc_unique)
             Strcpy(buf, actualn); /* avoid spellbook of Book of the Dead */
         else
-            Sprintf(eos(buf), " 之 %s", actualn);
+            Sprintf(eos(buf), "之%s", actualn);
     }
     if (un)
-        Sprintf(eos(buf), " 被称为 %s", un);
+        Sprintf(eos(buf), "被称为%s", un);
     if (dn)
-        Sprintf(eos(buf), " ( %s)", dn);
+        Sprintf(eos(buf), " (%s)", dn);
     return buf;
 }
 
@@ -232,7 +232,7 @@ boolean juice; /* whether or not to append " juice" to the name */
     else
         fruit_nam = pl_fruit; /* use it as is */
 
-    Sprintf(buf, "%s%s", makesingular(fruit_nam), juice ? " 果汁" : "");
+    Sprintf(buf, "%s%s", makesingular(fruit_nam), juice ? "果汁" : "");
     return buf;
 }
 
@@ -290,26 +290,26 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
     switch (obj->oclass) {
     case AMULET_CLASS:
         if (!dknown)
-            Strcpy(buf, "护身符");  //amulet
+            Strcpy(buf, "护身符");
         else if (typ == AMULET_OF_YENDOR || typ == FAKE_AMULET_OF_YENDOR)
             /* each must be identified individually */
             Strcpy(buf, known ? actualn : dn);
         else if (nn)
             Strcpy(buf, actualn);
         else if (un)
-            Sprintf(buf, "护身符 被称为 %s", un);
+            Sprintf(buf, "护身符被称为%s", un);
         else
-            Sprintf(buf, "%s 护身符", dn);
+            Sprintf(buf, "%s护身符", dn);
         break;
     case WEAPON_CLASS:
         if (is_poisonable(obj) && obj->opoisoned)
-            Strcpy(buf, "有毒的 ");
+            Strcpy(buf, "有毒的");
     case VENOM_CLASS:
     case TOOL_CLASS:
         if (typ == LENSES)
-            Strcpy(buf, "一副 ");
+            Strcpy(buf, "一副");
         else if (is_wet_towel(obj))
-            Strcpy(buf, (obj->spe < 3) ? "潮湿的 " : "湿的 ");
+            Strcpy(buf, (obj->spe < 3) ? "潮湿的" : "湿的");
 
         if (!dknown)
             Strcat(buf, dn ? dn : actualn);
@@ -317,14 +317,14 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
             Strcat(buf, actualn);
         else if (un) {
             Strcat(buf, dn ? dn : actualn);
-            Strcat(buf, " 被称为 ");
+            Strcat(buf, "被称为");
             Strcat(buf, un);
         } else
             Strcat(buf, dn ? dn : actualn);
         /* If we use an() here we'd have to remember never to use */
         /* it whenever calling doname() or xname(). */
         if (typ == FIGURINE && omndx != NON_PM) {
-            Sprintf(eos(buf), " 之 %s",
+            Sprintf(eos(buf), "之%s",
                     mons[omndx].mname);
         } else if (is_wet_towel(obj)) {
             if (wizard)
@@ -334,11 +334,11 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
     case ARMOR_CLASS:
         /* depends on order of the dragon scales objects */
         if (typ >= GRAY_DRAGON_SCALES && typ <= YELLOW_DRAGON_SCALES) {
-            Sprintf(buf, "一套 %s", actualn);
+            Sprintf(buf, "一套%s", actualn);
             break;
         }
         if (is_boots(obj) || is_gloves(obj))
-            Strcpy(buf, "一双 ");
+            Strcpy(buf, "一双");
 
         if (obj->otyp >= ELVEN_SHIELD && obj->otyp <= ORCISH_SHIELD
             && !dknown) {
@@ -365,7 +365,7 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
                 Strcpy(buf, "盾牌");
             else
                 Strcpy(buf, "盔甲");
-            Strcat(buf, " 被称为 ");
+            Strcat(buf, "被称为");
             Strcat(buf, un);
         } else
             Strcat(buf, dn);
@@ -395,11 +395,11 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
         if (Is_pudding(obj)) {
             Sprintf(buf, "%s%s",
                     (obj->owt < 100)
-                       ? "小的 "
+                       ? "小的"
                        : (obj->owt > 500)
-                          ? "很大的 "
+                          ? "很大的"
                           : (obj->owt > 300)
-                             ? "大的 "
+                             ? "大的"
                              : "",
                     actualn);
             break;
@@ -415,9 +415,9 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
         break;
     case ROCK_CLASS:
         if (typ == STATUE && omndx != NON_PM)
-            Sprintf(buf, "%s%s 之 %s%s",
+            Sprintf(buf, "%s%s之%s%s",
                     (Role_if(PM_ARCHEOLOGIST) && (obj->spe & STATUE_HISTORIC))
-                       ? "有历史性的 "
+                       ? "有历史性的"
                        : "",
                     actualn,
                     type_is_pname(&mons[omndx])
@@ -433,56 +433,56 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
         break;
     case BALL_CLASS:
         Sprintf(buf, "%s沉重的铁球",
-                (obj->owt > ocl->oc_weight) ? "非常 " : "");
+                (obj->owt > ocl->oc_weight) ? "非常" : "");
         break;
     case POTION_CLASS:
         if (dknown && obj->odiluted)
-            Strcpy(buf, "稀释的 ");
+            Strcpy(buf, "稀释的");
         if (nn || un || !dknown) {
-            Strcat(buf, "药水");  //potion
+            Strcat(buf, "药水");
             if (!dknown)
                 break;
             if (nn) {
-                Strcat(buf, " 之  ");
+                Strcat(buf, "之");
                 if (typ == POT_WATER && bknown
                     && (obj->blessed || obj->cursed)) {
-                    Strcat(buf, obj->blessed ? "圣 " : "邪 ");
+                    Strcat(buf, obj->blessed ? "圣" : "邪");
                 }
                 Strcat(buf, actualn);
             } else {
-                Strcat(buf, " 被称为 ");
+                Strcat(buf, "被称为");
                 Strcat(buf, un);
             }
         } else {
             Strcat(buf, dn);
-            Strcat(buf, " 药水");
+            Strcat(buf, "药水");
         }
         break;
     case SCROLL_CLASS:
-        Strcpy(buf, "卷轴");  //scroll
+        Strcpy(buf, "卷轴");
         if (!dknown)
             break;
         if (nn) {
-            Strcat(buf, " 之  ");
+            Strcat(buf, "之");
             Strcat(buf, actualn);
         } else if (un) {
-            Strcat(buf, " 被称为 ");
+            Strcat(buf, "被称为");
             Strcat(buf, un);
         } else if (ocl->oc_magic) {
-            Strcat(buf, " 标签为 ");
+            Strcat(buf, "标签为");
             Strcat(buf, dn);
         } else {
             Strcpy(buf, dn);
-            Strcat(buf, " 卷轴");
+            Strcat(buf, "卷轴");
         }
         break;
     case WAND_CLASS:
         if (!dknown)
-            Strcpy(buf, "魔杖");  //wand
+            Strcpy(buf, "魔杖");
         else if (nn)
-            Sprintf(buf, "%s  魔杖", actualn);
+            Sprintf(buf, "%s魔杖", actualn);
         else if (un)
-            Sprintf(buf, "魔杖 被称为 %s", un);
+            Sprintf(buf, "魔杖被称为%s", un);
         else
             Sprintf(buf, "%s魔杖", dn);
         break;
@@ -493,46 +493,46 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
             else if (nn)
                 Strcpy(buf, actualn);
             else if (un)
-                Sprintf(buf, "小说 被称为 %s", un);
+                Sprintf(buf, "小说被称为%s", un);
             else
-                Sprintf(buf, "%s 书", dn);
+                Sprintf(buf, "%s书", dn);
             break;
             /* end of tribute */
         } else if (!dknown) {
-            Strcpy(buf, "魔法书");  //spellbook
+            Strcpy(buf, "魔法书");
         } else if (nn) {
             if (typ != SPE_BOOK_OF_THE_DEAD)
-                Strcpy(buf, "魔法书之  ");
+                Strcpy(buf, "魔法书之");
             Strcat(buf, actualn);
         } else if (un) {
-            Sprintf(buf, "魔法书 被称为 %s", un);
+            Sprintf(buf, "魔法书被称为%s", un);
         } else
-            Sprintf(buf, "%s 魔法书", dn);
+            Sprintf(buf, "%s魔法书", dn);
         break;
     case RING_CLASS:
         if (!dknown)
-            Strcpy(buf, "戒指");  //ring
+            Strcpy(buf, "戒指");
         else if (nn)
-            Sprintf(buf, " %s  戒指", actualn);
+            Sprintf(buf, "%s戒指", actualn);
         else if (un)
-            Sprintf(buf, "戒指 被称为 %s", un);
+            Sprintf(buf, "戒指被称为%s", un);
         else
             Sprintf(buf, "%s戒指", dn);
         break;
     case GEM_CLASS: {
-        const char *rock = (ocl->oc_material == MINERAL) ? "石头" : "宝石";  //gem
+        const char *rock = (ocl->oc_material == MINERAL) ? "石头" : "宝石";
 
         if (!dknown) {
             Strcpy(buf, rock);
         } else if (!nn) {
             if (un)
-                Sprintf(buf, "%s 被称为 %s", rock, un);
+                Sprintf(buf, "%s被称为%s", rock, un);
             else
-                Sprintf(buf, "%s %s", dn, rock);
+                Sprintf(buf, "%s%s", dn, rock);
         } else {
             Strcpy(buf, actualn);
             if (GemStone(typ))
-                Strcat(buf, " 石头");
+                Strcat(buf, "石头");
         }
         break;
     }
@@ -545,11 +545,11 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
     if (obj->otyp == T_SHIRT && program_state.gameover) {
         char tmpbuf[BUFSZ];
 
-        Sprintf(eos(buf), " 带有文字 \"%s\"", tshirt_text(obj, tmpbuf));
+        Sprintf(eos(buf), "带有文字\"%s\"", tshirt_text(obj, tmpbuf));
     }
 
     if (has_oname(obj) && dknown) {
-        Strcat(buf, "  名为 ");
+        Strcat(buf, "名为");
     nameit:
         Strcat(buf, ONAME(obj));
     }
@@ -601,8 +601,8 @@ struct obj *obj;
         bareobj.spe = obj->spe;
 
     bufp = distant_name(&bareobj, xname); /* xname(&bareobj) */
-    if (!strncmp(bufp, " 未被诅咒的 ", 17))
-        bufp += 17; /* Role_if(PM_PRIEST) */
+    if (!strncmp(bufp, "未被诅咒的", 15))
+        bufp += 15; /* Role_if(PM_PRIEST) */
 
     objects[otyp].oc_uname = saveobcls.oc_uname;
     objects[otyp].oc_name_known = saveobcls.oc_name_known;
@@ -620,7 +620,7 @@ struct obj *obj;
     if (m_shot.n > 1 && m_shot.o == obj->otyp) {
         /* "the Nth arrow"; value will eventually be passed to an() or
            The(), both of which correctly handle this "the " prefix */
-        Sprintf(tmpbuf, "第%d 支 ", m_shot.i);
+        Sprintf(tmpbuf, "第%d支", m_shot.i);
         onm = strprepend(onm, tmpbuf);
     }
     return onm;
@@ -685,34 +685,34 @@ char *prefix;
     if (obj->oeroded && !iscrys) {
         switch (obj->oeroded) {
         case 2:
-            Strcat(prefix, "非常 ");
+            Strcat(prefix, "非常");
             break;
         case 3:
-            Strcat(prefix, "彻底 ");
+            Strcat(prefix, "彻底");
             break;
         }
-        Strcat(prefix, is_rustprone(obj) ? "生锈的 " : "烧焦的 ");
+        Strcat(prefix, is_rustprone(obj) ? "生锈的" : "烧焦的");
     }
     if (obj->oeroded2 && !iscrys) {
         switch (obj->oeroded2) {
         case 2:
-            Strcat(prefix, "非常 ");
+            Strcat(prefix, "非常");
             break;
         case 3:
-            Strcat(prefix, "彻底 ");
+            Strcat(prefix, "彻底");
             break;
         }
-        Strcat(prefix, is_corrodeable(obj) ? "腐蚀的 " : "腐烂的 ");
+        Strcat(prefix, is_corrodeable(obj) ? "腐蚀的" : "腐烂的");
     }
     if (rknown && obj->oerodeproof)
         Strcat(prefix, iscrys
-                          ? "定形的 "
+                          ? "定形的"
                           : is_rustprone(obj)
-                             ? "防锈的 "
+                             ? "防锈的"
                              : is_corrodeable(obj)
-                                ? "防腐蚀的 " /* "stainless"? */
+                                ? "防腐蚀的" /* "stainless"? */
                                 : is_flammable(obj)
-                                   ? "防火的 "
+                                   ? "防火的"
                                    : "");
 }
 
@@ -745,8 +745,8 @@ boolean with_price;
      * combining both into one function taking a parameter.
      */
     /* must check opoisoned--someone can have a weirdly-named fruit */
-    if (!strncmp(bp, "有毒的 ", 10) && obj->opoisoned) {
-        bp += 10;
+    if (!strncmp(bp, "有毒的", 9) && obj->opoisoned) {
+        bp += 9;
         ispoisoned = TRUE;
     }
 
@@ -780,7 +780,7 @@ boolean with_price;
              /* not bag of tricks: empty if container which has no contents */
              : (Is_container(obj) || obj->otyp == STATUE)
             && !Has_contents(obj)))
-        Strcat(prefix, "空的 ");
+        Strcat(prefix, "空的");
 
     if (bknown && obj->oclass != COIN_CLASS
         && (obj->otyp != POT_WATER || !objects[POT_WATER].oc_name_known
@@ -789,9 +789,9 @@ boolean with_price;
          * always allow "uncursed potion of water"
          */
         if (obj->cursed)
-            Strcat(prefix, " 被诅咒的 ");
+            Strcat(prefix, "被诅咒的");
         else if (obj->blessed)
-            Strcat(prefix, " 受祝福的 ");
+            Strcat(prefix, "受祝福的");
         else if (!iflags.implicit_uncursed
             /* For most items with charges or +/-, if you know how many
              * charges are left or what the +/- is, then you must have
@@ -812,20 +812,20 @@ boolean with_price;
                      && obj->otyp != FAKE_AMULET_OF_YENDOR
                      && obj->otyp != AMULET_OF_YENDOR
                      && !Role_if(PM_PRIEST)))
-            Strcat(prefix, " 未被诅咒的 ");
+            Strcat(prefix, "未被诅咒的");
     }
 
     if (lknown && Is_box(obj)) {
         if (obj->obroken)
-            Strcat(prefix, "坏锁的 ");
+            Strcat(prefix, "坏锁的");
         else if (obj->olocked)
-            Strcat(prefix, "上锁的 ");
+            Strcat(prefix, "上锁的");
         else
-            Strcat(prefix, "未锁的 ");
+            Strcat(prefix, "未锁的");
     }
 
     if (obj->greased)
-        Strcat(prefix, "上油的 ");
+        Strcat(prefix, "上油的");
 
     if (cknown && Has_contents(obj)) {
         /* we count all objects (obj->quantity); perhaps we should
@@ -835,17 +835,17 @@ boolean with_price;
            when there are 2 scrolls plus 1000 gold pieces */
         long itemcount = count_contents(obj, FALSE, FALSE, TRUE);
 
-        Sprintf(eos(bp), " 包含%ld 件物品", itemcount);
+        Sprintf(eos(bp), "包含%ld件物品", itemcount);
     }
 
     switch (obj->oclass) {
     case AMULET_CLASS:
         if (obj->owornmask & W_AMUL)
-            Strcat(bp, " ( 穿戴中)");
+            Strcat(bp, " (穿戴中)");
         break;
     case WEAPON_CLASS:
         if (ispoisoned)
-            Strcat(prefix, "有毒的 ");
+            Strcat(prefix, "有毒的");
     plus:
         add_erosion_words(obj, prefix);
         if (known) {
@@ -855,38 +855,38 @@ boolean with_price;
         break;
     case ARMOR_CLASS:
         if (obj->owornmask & W_ARMOR)
-            Strcat(bp, (obj == uskin) ? " ( 嵌在你的皮肤里)"
-                                      : " ( 穿戴中)");
+            Strcat(bp, (obj == uskin) ? " (嵌在你的皮肤里)"
+                                      : " (穿戴中)");
         goto plus;
     case TOOL_CLASS:
         /* weptools already get this done when we go to the +n code */
         if (!is_weptool(obj))
             add_erosion_words(obj, prefix);
         if (obj->owornmask & (W_TOOL /* blindfold */ | W_SADDLE)) {
-            Strcat(bp, " ( 穿戴中)");
+            Strcat(bp, " (穿戴中)");
             break;
         }
         if (obj->otyp == LEASH && obj->leashmon != 0) {
-            Strcat(bp, " ( 使用中)");
+            Strcat(bp, " (使用中)");
             break;
         }
         if (is_weptool(obj))
             goto plus;
         if (obj->otyp == CANDELABRUM_OF_INVOCATION) {
             if (!obj->spe)
-                Strcpy(tmpbuf, " 无");
+                Strcpy(tmpbuf, "无");
             else
                 Sprintf(tmpbuf, "%d", obj->spe);
-            Sprintf(eos(bp), " (%s 蜡烛%s)", tmpbuf,
-                    !obj->lamplit ? " 在上面" : ",  点着");
+            Sprintf(eos(bp), " (%s蜡烛%s)", tmpbuf,
+                    !obj->lamplit ? "在上面" : ", 点着");
             break;
         } else if (obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP
                    || obj->otyp == BRASS_LANTERN || Is_candle(obj)) {
             if (Is_candle(obj)
                 && obj->age < 20L * (long) objects[obj->otyp].oc_cost)
-                Strcat(prefix, "部分使用的 ");
+                Strcat(prefix, "部分使用的");
             if (obj->lamplit)
-                Strcat(bp, " ( 点着)");
+                Strcat(bp, " (点着)");
             break;
         }
         if (objects[obj->otyp].oc_charged)
@@ -900,18 +900,18 @@ boolean with_price;
         break;
     case POTION_CLASS:
         if (obj->otyp == POT_OIL && obj->lamplit)
-            Strcat(bp, " ( 点着)");
+            Strcat(bp, " (点着)");
         break;
     case RING_CLASS:
         add_erosion_words(obj, prefix);
     ring:
         if (obj->owornmask & W_RINGR)
-            Strcat(bp, " ( 右 ");
+            Strcat(bp, " (右");
         if (obj->owornmask & W_RINGL)
-            Strcat(bp, " ( 左 ");
+            Strcat(bp, " (左");
         if (obj->owornmask & W_RING) {
             Strcat(bp, body_part(HAND));
-            Strcat(bp, " 上)");
+            Strcat(bp, "上)");
         }
         if (known && objects[obj->otyp].oc_charged) {
             Strcat(prefix, sitoa(obj->spe));
@@ -920,7 +920,7 @@ boolean with_price;
         break;
     case FOOD_CLASS:
         if (obj->oeaten)
-            Strcat(prefix, "部分食用的 ");
+            Strcat(prefix, "部分食用的");
         if (obj->otyp == CORPSE) {
             Sprintf(prefix, "%s ",
                     corpse_xname(obj, prefix, CXN_ARTICLE | CXN_NOCORPSE));
@@ -934,7 +934,7 @@ boolean with_price;
                 Strcat(prefix, mons[omndx].mname);
                 Strcat(prefix, " ");
                 if (obj->spe)
-                    Strcat(bp, " ( 你下的)");
+                    Strcat(bp, " (你下的)");
             }
         }
         if (obj->otyp == MEAT_RING)
@@ -944,25 +944,25 @@ boolean with_price;
     case CHAIN_CLASS:
         add_erosion_words(obj, prefix);
         if (obj->owornmask & W_BALL)
-            Strcat(bp, " ( 拴在你身上)");
+            Strcat(bp, " (拴在你身上)");
         break;
     }
 
     if ((obj->owornmask & W_WEP) && !mrg_to_wielded) {
         if (obj->quan != 1L) {
-            Strcat(bp, " ( 使用中)");
+            Strcat(bp, " (使用中)");
         } else {
             const char *hand_s = body_part(HAND);
 
             if (bimanual(obj)){
                 //hand_s = makeplural(hand_s);
-                Sprintf(eos(bp), " ( 拿在双%s 上)", hand_s);
+                Sprintf(eos(bp), " (拿在双%s上)", hand_s);
             }
-            else Sprintf(eos(bp), " ( 拿在%s 上)", hand_s);
+            else Sprintf(eos(bp), " (拿在%s上)", hand_s);
 
             if (warn_obj_cnt && obj == uwep && (EWarn_of_mon & W_WEP) != 0L) {
                 /* presumably can be felt when blind */
-                Strcat(bp, " ( 发光的");
+                Strcat(bp, " (发光的");
                 if (!Blind)
                     Sprintf(eos(bp), " %s", glow_color(obj->oartifact));
                 Strcat(bp, ")");
@@ -971,9 +971,9 @@ boolean with_price;
     }
     if (obj->owornmask & W_SWAPWEP) {
         if (u.twoweap)
-            Sprintf(eos(bp), " ( 拿在另一只%s 上)", body_part(HAND));
+            Sprintf(eos(bp), " (拿在另一只%s上)", body_part(HAND));
         else
-            Strcat(bp, " ( 备用武器;  未使用)");
+            Strcat(bp, " (备用武器; 未使用)");
     }
     if (obj->owornmask & W_QUIVER) {
         switch (obj->oclass) {
@@ -981,16 +981,16 @@ boolean with_price;
             if (is_ammo(obj)) {
                 if (objects[obj->otyp].oc_skill == -P_BOW) {
                     /* Ammo for a bow */
-                    Strcat(bp, " ( 箭囊中)");
+                    Strcat(bp, " (箭囊中)");
                     break;
                 } else {
                     /* Ammo not for a bow */
-                    Strcat(bp, " ( 囊中)");
+                    Strcat(bp, " (囊中)");
                     break;
                 }
             } else {
                 /* Weapons not considered ammo */
-                Strcat(bp, " ( 准备就绪)");
+                Strcat(bp, " (准备就绪)");
                 break;
             }
         /* Small things and ammo not for a bow */
@@ -999,16 +999,16 @@ boolean with_price;
         case WAND_CLASS:
         case COIN_CLASS:
         case GEM_CLASS:
-            Strcat(bp, " ( 囊中)");
+            Strcat(bp, " (囊中)");
             break;
         default: /* odd things */
-            Strcat(bp, " ( 准备就绪)");
+            Strcat(bp, " (准备就绪)");
         }
     }
     if (!iflags.suppress_price && is_unpaid(obj)) {
         long quotedprice = unpaid_cost(obj, TRUE);
 
-        Sprintf(eos(bp), " ( %s, %ld %s)",
+        Sprintf(eos(bp), " (%s, %ld %s)",
                 obj->unpaid ? "未付款" : "里面未付款",
                 quotedprice, currency(quotedprice));
     } else if (with_price) {
@@ -1160,7 +1160,7 @@ unsigned cxn_flags; /* bitmask of CXN_xxx values */
     }
 
     if (!omit_corpse) {
-        Strcat(nambuf, " 尸体");
+        Strcat(nambuf, "尸体");
         /* makeplural(nambuf) => append "s" to "corpse" */
         if (otmp->quan > 1L && !ignore_quan) {
             Strcat(nambuf, "");
